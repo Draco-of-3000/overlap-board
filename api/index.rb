@@ -25,7 +25,11 @@ module OverlapBoard
 
   def working_hours_utc(city, zone, time)
     offset = utc_offset_minutes(zone, time)
-    { city: city, start: WORK_START - offset, finish: WORK_END - offset }
+    { city: city, zone: zone, start: WORK_START - offset, finish: WORK_END - offset }
+  end
+
+  def local_time(zone, time)
+    TZInfo::Timezone.get(zone).to_local(time).strftime("%H:%M")
   end
 
   def format_minutes(total)
@@ -47,7 +51,7 @@ module OverlapBoard
     hours = TEAM.map { |city, zone| working_hours_utc(city, zone, time) }
     local = "#{format_minutes(WORK_START)}-#{format_minutes(WORK_END)}"
     rows = hours.map do |h|
-      "<tr><td>#{h[:city]}</td><td>#{local}</td><td>#{format_minutes(h[:start])}-#{format_minutes(h[:finish])}</td></tr>"
+      "<tr><td>#{h[:city]}</td><td>#{local_time(h[:zone], time)}</td><td>#{local}</td><td>#{format_minutes(h[:start])}-#{format_minutes(h[:finish])}</td></tr>"
     end
     best = best_window(hours)
 
@@ -72,7 +76,7 @@ module OverlapBoard
           <h1>Overlap Board</h1>
           <p>When is everyone on the team online? Working hours are 09:00-17:00 local time in every city.</p>
           <table>
-            <thead><tr><th>City</th><th>Working hours (local)</th><th>Working hours (UTC)</th></tr></thead>
+            <thead><tr><th>City</th><th>Local time now</th><th>Working hours (local)</th><th>Working hours (UTC)</th></tr></thead>
             <tbody>#{rows.join}</tbody>
           </table>
           <h2>Best window today (UTC)</h2>
