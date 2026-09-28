@@ -83,7 +83,7 @@ module OverlapBoard
           <h2>Best window today (UTC)</h2>
           <p class="best-window">#{format_minutes(best[:start])}-#{format_minutes(best[:finish])}: #{best[:online].join(", ")} (#{best[:online].size} of #{TEAM.size} cities)</p>
         </main>
-        <footer>Maintaned by the platform team.</footer>
+        <footer>Maintained by the platform team.</footer>
       </body>
       </html>
     HTML
