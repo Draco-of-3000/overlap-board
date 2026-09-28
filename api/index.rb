@@ -67,7 +67,7 @@ module OverlapBoard
           main, footer { max-width: 720px; margin: 0 auto; }
           table { width: 100%; border-collapse: collapse; background: #ffffff; }
           th, td { text-align: left; padding: 0.5rem 0.75rem; border-bottom: 1px solid #d0d7de; }
-          .best-window { padding: 0.75rem; background: #ffffff; border: 1px solid #d0d7de; }
+          .best-window { padding: 0.75rem; background: #dafbe1; border: 1px solid #4ac26b; }
           footer { margin-top: 2rem; font-size: 0.85rem; color: #59636e; }
         </style>
       </head>
