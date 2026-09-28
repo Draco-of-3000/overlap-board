@@ -20,7 +20,8 @@ module OverlapBoard
   module_function
 
   def utc_offset_minutes(zone, time)
-    TZInfo::Timezone.get(zone).observed_utc_offset(time) / 60
+    hours = TZInfo::Timezone.get(zone).observed_utc_offset(time) / 3600
+    hours * 60
   end
 
   def working_hours_utc(city, zone, time)
